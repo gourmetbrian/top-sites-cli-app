@@ -24,7 +24,7 @@ class Scraper
     #description
     site[:description] = site_doc.css("section#contact-panel-content p.color-s3").text
     #rank
-    site[:rank] = site_doc.css("section#traffic-rank-content strong").text.strip
+    site[:rank] = site_doc.css("section#traffic-rank-content strong.metrics-data").text[2,3].strip
     #global use
     countries = site_doc.css("section#visitors-content table tbody tr").collect {|country| country.css("a").text[2..-1]}
     site[:top_users] = countries
@@ -39,5 +39,10 @@ class Scraper
 end
 
 
-site = Scraper.scrape_site_info("Google.com")
-puts site
+# site = Scraper.scrape_site_info("Google.com")
+# puts site
+# site_2 = Scraper.scrape_site_info("Tumblr.com")
+# puts site_2
+# site_3 = Scraper.scrape_site_info("Mail.ru")
+# puts site_3
+# put site_3.description
