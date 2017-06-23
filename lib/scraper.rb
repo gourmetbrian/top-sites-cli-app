@@ -12,7 +12,6 @@ class Scraper
     sites = doc.css("div.listings.table div.site-listing div.DescriptionCell").collect do |site|
       site.css("p").text.strip
     end
-    # binding.pry
     sites
   end
 
@@ -22,15 +21,19 @@ class Scraper
     site[:name] = url
     url = SITE_BASE_URL + url.downcase
     site_doc = Nokogiri::HTML(open(url))
-    #name, description, bounce_rate, page_views, time_on_site
+    #description
     site[:description] = site_doc.css("section#contact-panel-content p.color-s3").text
+    #global use
+    countries = site_doc.css("section#visitors-content table tbody tr").collect {|country| country.css("a").text[2..-1]}
+    site[:top_users] = countries
+    #metrics
     metrics = site_doc.css("section#engagement-content span.col-pad div strong").collect {|metric| metric.text.strip}
     site[:bounce_rate] = metrics[0]
     site[:page_views] = metrics[1]
     site[:time_on_site] = metrics[2]
     site
   end
-  
+
 end
 
 
