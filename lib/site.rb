@@ -19,6 +19,7 @@ class Site
   #instance methods
 
   def update_attributes(site_hash)
+  end
 
   def description
     if @description.bytes.count > @description.chars.count
@@ -28,7 +29,7 @@ class Site
     end
   end
 
-  private
+  # private
 
 end
 
@@ -36,5 +37,5 @@ end
 # puts site_3.description
 # site_2 = Site.new(Scraper.scrape_site_info("Google.co.jp"))
 # puts site_2.description
-site = Site.new("Google.com")
+# site = Site.new("Google.com")
 # puts site.name
