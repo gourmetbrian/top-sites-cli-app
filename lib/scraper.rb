@@ -23,6 +23,8 @@ class Scraper
     site_doc = Nokogiri::HTML(open(url))
     #description
     site[:description] = site_doc.css("section#contact-panel-content p.color-s3").text
+    #rank
+    site[:rank] = site_doc.css("section#traffic-rank-content strong").text.strip
     #global use
     countries = site_doc.css("section#visitors-content table tbody tr").collect {|country| country.css("a").text[2..-1]}
     site[:top_users] = countries
