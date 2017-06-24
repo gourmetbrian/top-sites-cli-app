@@ -11,11 +11,7 @@ class CLI
   end
 
   def run
-    # display_top_fifty_sites(get_top_fifty_sites)
-    # display_site(Site.new(Scraper.scrape_site_info("Google.com")))
-    # display_site(Site.new(Scraper.scrape_site_info("Amazon.com")))
-    display_site(Site.new(Scraper.scrape_site_info("Learn.co")))
-    display_site(Site.new(Scraper.scrape_site_info("Thomasnet.com")))
+    display_top_fifty_sites(get_top_fifty_sites)
   end
 
   def get_top_fifty_sites
