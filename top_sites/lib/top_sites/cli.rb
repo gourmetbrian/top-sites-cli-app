@@ -1,23 +1,32 @@
-require_relative "./scraper.rb"
-require_relative "./site.rb"
+class TopSites::CLI
 
-class CLI
+  def test
+    puts "This test worked"
+    sites = TopSites::Scraper.scrape_top_fifty_sites
+    display_top_fifty_sites(sites)
+  end
 
   def run
-    display_top_fifty_sites(get_top_fifty_sites)
-  
+    test
+    sites = self.get_top_fifty_sites
+    self.display_top_fifty_sites(sites)
   end
 
   def
 
   def get_top_fifty_sites
-    Scraper.scrape_top_fifty_sites
+    TopSites::Scraper.scrape_top_fifty_sites
   end
 
   def display_top_fifty_sites(sites)
     puts "~~~~~~~~~~~~~~~~~~ TOP 50 WEBSITES: GLOBAL RANKINGS ~~~~~~~~~~~~~~~~~~"
     sites.each_with_index do |site, i|
-      puts "                    #{i.to_i + 1}                            #{site}"
+      if i < 9
+        puts "                    #{i.to_i + 1}                             #{site}"
+       else
+        puts "                    #{i.to_i + 1}                            #{site}"
+
+    end
     end
   end
 
@@ -44,5 +53,5 @@ class CLI
   end
 end
 
-
-CLI.new.run
+# TopSites::CLI.new.run
+# CLI.new.run

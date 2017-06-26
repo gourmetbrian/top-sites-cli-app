@@ -1,8 +1,4 @@
-require 'open-uri'
-require 'pry'
-require 'nokogiri'
-
-class Scraper
+class TopSites::Scraper
 
   SITE_BASE_URL = "http://www.alexa.com/siteinfo/"
   TOP_SITES_URL = "http://www.alexa.com/topsites"
@@ -39,8 +35,8 @@ class Scraper
 end
 
 
-site = Scraper.scrape_site_info("Learn.co")
-puts site
+# site = Scraper.scrape_site_info("Learn.co")
+# puts site
 # site = Scraper.scrape_site_info("Spotify.com")
 # puts site
 # site_2 = Scraper.scrape_site_info("Tumblr.com")

@@ -1,5 +1,6 @@
-require "top_sites/version"
+# require "top_sites/version"
 
 module TopSites
-  # Your code goes here...
 end
+
+require_relative '../config/environment'

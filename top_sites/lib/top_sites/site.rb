@@ -1,10 +1,4 @@
-require 'open-uri'
-require 'pry'
-require 'nokogiri'
-
-require './scraper'
-
-class Site
+class TopSites::Site
 
   attr_accessor :name, :page_views, :time_on_site, :bounce_rate, :top_users, :rank
   attr_writer :description
@@ -32,6 +26,10 @@ class Site
   # private
 
 end
+
+name = {}
+name[:name] = "Cool Site"
+site = TopSites::Site.new(name)
 
 # site_3 = Site.new(Scraper.scrape_site_info("Mail.ru"))
 # puts site_3.description
