@@ -3,16 +3,12 @@ require_relative "./site.rb"
 
 class CLI
 
-
-
-
-  def initialize
-
-  end
-
   def run
     display_top_fifty_sites(get_top_fifty_sites)
+  
   end
+
+  def
 
   def get_top_fifty_sites
     Scraper.scrape_top_fifty_sites
