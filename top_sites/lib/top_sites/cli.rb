@@ -10,14 +10,19 @@ class TopSites::CLI
 
   end
 
+  def exit_program
+    puts "Thanks for using Top Sites!"
+    exit
+  end
+
+
   def display_top_fifty_sites(sites)
     puts "~~~~~~~~~~~~~~~~~~ TOP 50 WEBSITES: GLOBAL RANKINGS ~~~~~~~~~~~~~~~~~~"
     sites.each_with_index do |site, i|
       if i < 9
-        puts "                    #{i.to_i + 1}                             #{site}"
+        puts "                    #{i.to_i + 1}                             #{site.name}"
        else
-        puts "                    #{i.to_i + 1}                            #{site}"
-
+        puts "                    #{i.to_i + 1}                            #{site.name}"
     end
     end
   end
@@ -54,24 +59,23 @@ class TopSites::CLI
     puts "or enter 'exit' to exit the program."
     input = gets.chomp
     if input == "exit"
-      puts "Thanks for using Top Sites!"
-      exit
+      exit_program
     end
     input = input.to_i
-    if input < 50 && input > 0
-      site = TopSites::Site.new(TopSites::Scraper.scrape_site_info(sites[input - 1]))
-      display_site(site)
+    if input <= 50 && input > 0
+      sites[input - 1].update_attributes(TopSites::Scraper.scrape_site_info(sites[input - 1].name))
+      display_site(sites[input - 1])
       puts ""
       puts "Would you like to learn about another site? Y/N"
       input = gets.chomp.downcase
       if input == "y"
         start
       else input == "n"
+        exit_program
       end
     else
       puts "I'm sorry, I didn't understand that."
-      start35
-
+      start
     end
   end
 
@@ -80,6 +84,3 @@ class TopSites::CLI
       start
     end
 end
-
-# TopSites::CLI.new.run
-# CLI.new.run

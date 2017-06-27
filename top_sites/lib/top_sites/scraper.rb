@@ -4,17 +4,20 @@ class TopSites::Scraper
   TOP_SITES_URL = "http://www.alexa.com/topsites"
 
   def self.scrape_top_fifty_sites
-    doc = Nokogiri::HTML(open(TOP_SITES_URL))
-    sites = doc.css("div.listings.table div.site-listing div.DescriptionCell").collect do |site|
-      site.css("p").text.strip
+    TopSites::Scraper.get_page.css("div.listings.table div.site-listing div.DescriptionCell").collect do |site|
+      new_site = {}
+      new_site[:name] = site.css("p").text.strip
+      TopSites::Site.new(new_site)
     end
-    sites
+  end
+
+  def self.get_page
+    Nokogiri::HTML(open(TOP_SITES_URL))
   end
 
   def self.scrape_site_info(url)
     #create a site hash
     site = {}
-    site[:name] = url
     url = SITE_BASE_URL + url.downcase
     site_doc = Nokogiri::HTML(open(url))
     #description
@@ -33,14 +36,3 @@ class TopSites::Scraper
   end
 
 end
-
-
-# site = Scraper.scrape_site_info("Learn.co")
-# puts site
-# site = Scraper.scrape_site_info("Spotify.com")
-# puts site
-# site_2 = Scraper.scrape_site_info("Tumblr.com")
-# puts site_2
-# site_3 = Scraper.scrape_site_info("Mail.ru")
-# puts site_3
-# put site_3.description

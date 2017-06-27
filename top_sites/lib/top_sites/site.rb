@@ -4,15 +4,13 @@ class TopSites::Site
   attr_writer :description
 
   def initialize(site_hash)
-    site_hash.each {|key, value| self.send(("#{key}="), value)}
+    update_attributes(site_hash)
   end
-
-  # class methods
-
 
   #instance methods
 
-  def update_attributes(site_hash)
+  def update_attributes(hash)
+    hash.each {|key, value| self.send(("#{key}="), value)}
   end
 
   def description
@@ -23,17 +21,4 @@ class TopSites::Site
     end
   end
 
-  # private
-
 end
-
-name = {}
-name[:name] = "Cool Site"
-site = TopSites::Site.new(name)
-
-# site_3 = Site.new(Scraper.scrape_site_info("Mail.ru"))
-# puts site_3.description
-# site_2 = Site.new(Scraper.scrape_site_info("Google.co.jp"))
-# puts site_2.description
-# site = Site.new("Google.com")
-# puts site.name
