@@ -1,21 +1,13 @@
 class TopSites::CLI
 
-  def test
-    puts "This test worked"
-    sites = TopSites::Scraper.scrape_top_fifty_sites
-    display_top_fifty_sites(sites)
-  end
-
-  def run
-    test
-    sites = self.get_top_fifty_sites
-    self.display_top_fifty_sites(sites)
+  def menu
+    puts "Please select one"
   end
 
   def
 
   def get_top_fifty_sites
-    TopSites::Scraper.scrape_top_fifty_sites
+
   end
 
   def display_top_fifty_sites(sites)
@@ -51,6 +43,42 @@ class TopSites::CLI
      puts "Daily Pageviews per Visitor: #{site.page_views}"
      puts "Daily Time on Site:          #{site.time_on_site}"
   end
+
+  def start
+    puts ""
+    sites = TopSites::Scraper.scrape_top_fifty_sites
+    display_top_fifty_sites(sites)
+    puts ""
+    puts "Would you like to learn more about one of these websites?"
+    puts "Enter the ranking of the website you'd like to read more about"
+    puts "or enter 'exit' to exit the program."
+    input = gets.chomp
+    if input == "exit"
+      puts "Thanks for using Top Sites!"
+      exit
+    end
+    input = input.to_i
+    if input < 50 && input > 0
+      site = TopSites::Site.new(TopSites::Scraper.scrape_site_info(sites[input - 1]))
+      display_site(site)
+      puts ""
+      puts "Would you like to learn about another site? Y/N"
+      input = gets.chomp.downcase
+      if input == "y"
+        start
+      else input == "n"
+      end
+    else
+      puts "I'm sorry, I didn't understand that."
+      start35
+
+    end
+  end
+
+
+    def run
+      start
+    end
 end
 
 # TopSites::CLI.new.run
