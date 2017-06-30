@@ -1,5 +1,3 @@
-# require "top_sites/version"
-
 module TopSites
 end
 

@@ -1,20 +1,15 @@
 class TopSites::CLI
 
-  def menu
-    puts "Please select one"
-  end
-
-  def
-
-  def get_top_fifty_sites
-
+  def confusion
+    puts "I'm sorry, I didn't understand that."
+    sleep(3)
+    start
   end
 
   def exit_program
     puts "Thanks for using Top Sites!"
     exit
   end
-
 
   def display_top_fifty_sites(sites)
     puts "~~~~~~~~~~~~~~~~~~ TOP 50 WEBSITES: GLOBAL RANKINGS ~~~~~~~~~~~~~~~~~~"
@@ -74,8 +69,7 @@ class TopSites::CLI
         exit_program
       end
     else
-      puts "I'm sorry, I didn't understand that."
-      start
+      confusion
     end
   end
 
